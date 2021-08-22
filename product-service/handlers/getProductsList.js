@@ -1,6 +1,6 @@
 'use strict';
 
-const {getProducts} = require('./mock/products');
+const {getProducts} = require('../mock/products');
 
 module.exports.getProductsList = async (event) => {
   const products = getProducts();
