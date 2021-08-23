@@ -1,4 +1,4 @@
-const getProducts = () => {
+export const getProducts = () => {
 	return [
 		{
 			id: 1,
@@ -65,5 +65,3 @@ const getProducts = () => {
 		},
 	];
 };
-
-module.exports = {getProducts};

@@ -1,8 +1,8 @@
 'use strict';
 
-const {getProducts} = require('../mock/products');
+import {getProducts} from '../mock/products.js';
 
-module.exports.getProductsList = async (event) => {
+export const getProductsList = async (event) => {
   const products = getProducts();
 
   return {

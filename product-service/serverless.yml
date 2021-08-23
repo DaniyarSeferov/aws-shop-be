@@ -29,6 +29,12 @@ provider:
   stage: dev
   region: eu-west-1
 
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"
