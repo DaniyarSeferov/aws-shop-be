@@ -1,20 +1,29 @@
 'use strict';
 
 import {getProductsPromise} from '../mock/products.js';
+import {HttpCode} from '../utils/const';
+import {getErrorResponse, normalizeResponse} from '../utils/utils';
 
 export const getProductsList = async (event) => {
-  const products = await getProductsPromise();
+  try {
+    const products = await getProductsPromise();
 
-  return {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
-    },
-    body: JSON.stringify(
-      products,
-      null,
-      2
-    ),
-  };
+    if (!Array.isArray(products) || products.length === 0) {
+      const error = new Error('Internal Server Error');
+      error.status = HttpCode.INTERNAL_SERVER_ERROR;
+      throw error;
+    }
+
+    const response = {
+      body: JSON.stringify(
+        products,
+        null,
+        2
+      ),
+    };
+
+    return normalizeResponse(response);
+  } catch (error) {
+    return getErrorResponse(error);
+  }
 };
