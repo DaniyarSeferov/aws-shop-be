@@ -1,9 +1,9 @@
 'use strict';
 
-import {getProducts} from '../mock/products.js';
+import {getProductsPromise} from '../mock/products.js';
 
 export const getProductsList = async (event) => {
-  const products = getProducts();
+  const products = await getProductsPromise();
 
   return {
     statusCode: 200,

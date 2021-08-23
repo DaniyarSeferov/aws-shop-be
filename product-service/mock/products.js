@@ -65,3 +65,11 @@ export const getProducts = () => {
 		},
 	];
 };
+
+export const getProductsPromise = () => {
+	return new Promise((resolve) => {
+		const data = getProducts();
+
+		resolve(data);
+	});
+};

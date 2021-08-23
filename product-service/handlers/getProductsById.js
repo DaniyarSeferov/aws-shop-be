@@ -1,11 +1,11 @@
 'use strict';
 
-import {getProducts} from '../mock/products.js';
+import {getProductsPromise} from '../mock/products.js';
 
 export const getProductsById = async (event) => {
 	const pathParameters = event.pathParameters || {};
 	const productId = Number(pathParameters.productId);
-	const products = getProducts();
+	const products = await getProductsPromise();
 	const product = products.find((productItem) => productItem.id === productId);
 
 	return {
