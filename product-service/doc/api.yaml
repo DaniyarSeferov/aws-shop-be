@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Book Store API
+  description: Book Store API
+  version: "1.0.0"
+servers: 
+  - url: https://c8q61szgi7.execute-api.eu-west-1.amazonaws.com/dev/products
+paths:
+  /products:
+    get:
+      description: Gets all books
+      responses:
+        '200':
+          description: Gets an array of books
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Book'
+  /products/{productId}:
+    get:
+      description: Gets book by ID
+      parameters: 
+        - in: path
+          name: productId
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the book to get
+      responses:
+        '200':
+          description: Gets book object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: bad input parameter
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Book:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - price
+        - count
+      properties:
+        id:
+          type: number
+          example: 1
+        title:
+          type: string
+          example: The Self-Taught Programmer
+        description:
+          type: string
+          example: I am a self-taught programmer.
+        price:
+          type: number
+          format: currency
+          example: 19.68
+        count:
+          type: number
+          example: 10
+    Error:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+    ErrorMessage:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          example: Product not found
