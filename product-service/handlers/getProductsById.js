@@ -1,5 +1,3 @@
-'use strict';
-
 import {getProductsPromise} from '../mock/products.js';
 import {getErrorResponse, normalizeResponse} from '../utils/utils';
 import {HttpCode} from '../utils/const';
