@@ -1,0 +1,35 @@
+service:
+  name: product-service
+# app and org for use with dashboard.serverless.com
+#app: your-app-name
+#org: your-org-name
+frameworkVersion: '2'
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-webpack
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: eu-west-1
+
+package:
+  individually: true
+
+functions:
+  getProductsList:
+    handler: handlers/getProductsList.getProductsList
+    events:
+      - http:
+          path: products
+          method: GET
+
+  getProductsById:
+    handler: handlers/getProductsById.getProductsById
+    events:
+      - http:
+          path: products/{productId}
+          method: GET
